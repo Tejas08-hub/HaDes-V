@@ -17,8 +17,7 @@ module cpu (
 
 fetch_stage fetch(
     .clk(clk),
-    .rst(rst),
-    .memory_port(memory_fetch_port)
+    .rst(rst)
 );
 
 decode_stage decode(
@@ -33,8 +32,7 @@ execute_stage execute(
 
 memory_stage memory(
     .clk(clk),
-    .rst(rst),
-    .memory_port(memory_mem_port)
+    .rst(rst)
 );
 
 writeback_stage writeback(

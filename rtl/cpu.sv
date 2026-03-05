@@ -1,9 +1,3 @@
-/* Copyright (c) 2024 Tobias Scheipel, David Beikircher, Florian Riedl
- * Embedded Architectures & Systems Group, Graz University of Technology
- * SPDX-License-Identifier: MIT
- * ---------------------------------------------------------------------
- * File: cpu.sv
- */
 module cpu (
     input logic clk,
     input logic rst,
@@ -17,7 +11,8 @@ module cpu (
 
 fetch_stage fetch(
     .clk(clk),
-    .rst(rst)
+    .rst(rst),
+    .wb(memory_fetch_port)
 );
 
 decode_stage decode(
@@ -32,7 +27,8 @@ execute_stage execute(
 
 memory_stage memory(
     .clk(clk),
-    .rst(rst)
+    .rst(rst),
+    .wb(memory_mem_port)
 );
 
 writeback_stage writeback(

@@ -17,8 +17,4 @@ module cpu (
     input logic external_interrupt_in,
     input logic timer_interrupt_in
 );
-
-    // TODO: Delete the following line and implement this module.
-    ref_cpu golden(.*);
-
 endmodule

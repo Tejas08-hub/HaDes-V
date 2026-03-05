@@ -4,9 +4,6 @@
  * ---------------------------------------------------------------------
  * File: cpu.sv
  */
-
-
-
 module cpu (
     input logic clk,
     input logic rst,
@@ -17,10 +14,11 @@ module cpu (
     input logic external_interrupt_in,
     input logic timer_interrupt_in
 );
+
 fetch_stage fetch(
     .clk(clk),
     .rst(rst),
-    .memory_fetch_port(memory_fetch_port)
+    .memory_port(memory_fetch_port)
 );
 
 decode_stage decode(
@@ -36,11 +34,12 @@ execute_stage execute(
 memory_stage memory(
     .clk(clk),
     .rst(rst),
-    .memory_mem_port(memory_mem_port)
+    .memory_port(memory_mem_port)
 );
 
 writeback_stage writeback(
     .clk(clk),
     .rst(rst)
 );
+
 endmodule

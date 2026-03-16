@@ -13,12 +13,8 @@ module fetch_stage (
 );
 
 logic [31:0] pc;
-
-always_ff @(posedge clk or posedge rst) begin
-    if (rst)
-        pc <= 32'b0;
-    else
-        pc <= pc + 4;
+always_ff @(posedge clk) begin
+    program_counter_reg_out <= pc;
 end
 
 assign wb.adr = pc;

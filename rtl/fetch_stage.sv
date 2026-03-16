@@ -27,7 +27,7 @@ assign wb.stb = 1'b1;
 assign wb.we  = 1'b0;
 
 always_ff @(posedge clk) begin
-    instruction_reg_out <= wb.dat_r;
+    instruction_reg_out <= wb.dat_s;
     program_counter_reg_out <= pc;
 end
 

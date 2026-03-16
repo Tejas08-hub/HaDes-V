@@ -33,7 +33,38 @@ module execute_stage (
     output logic [31:0] jump_address_backwards_out
 );
 
-    // TODO: Delete the following line and implement this module.
-    ref_execute_stage golden(*);
+    logic [31:0] alu_result;
+
+    // Simple ALU (only addition for now)
+    always_comb begin
+        alu_result = rs1_data_in + rs2_data_in;
+    end
+
+    // Pipeline register
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            source_data_reg_out <= 32'b0;
+            rd_data_reg_out <= 32'b0;
+            instruction_reg_out <= '0;
+            program_counter_reg_out <= 32'b0;
+            next_program_counter_reg_out <= 32'b0;
+            jump_address_backwards_out <= 32'b0;
+        end
+        else begin
+            source_data_reg_out <= rs2_data_in;
+            rd_data_reg_out <= alu_result;
+            instruction_reg_out <= instruction_in;
+            program_counter_reg_out <= program_counter_in;
+            next_program_counter_reg_out <= program_counter_in + 4;
+            jump_address_backwards_out <= jump_address_backwards_in;
+        end
+    end
+
+    // Pass pipeline status
+    assign status_forwards_out = status_forwards_in;
+    assign status_backwards_out = status_backwards_in;
+
+    // Forwarding (disabled for now)
+    assign forwarding_out = '0;
 
 endmodule
